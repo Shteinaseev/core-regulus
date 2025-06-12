@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
 }
 
@@ -16,10 +16,23 @@ a{
 }
 
 body {
+    width: 100%;
     height: 200vh;
-    background-image:radial-gradient(circle farthest-corner, #060A33, #000000);
     color: #ffffff;
     overflow-x: hidden;
+    background-image:radial-gradient(circle farthest-corner, #060A33, #080808);
+    padding-inline: 60px;
+}
+main{
+    width: 100%;
+    height: 100%;
+}
+
+.core {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .header {
@@ -27,7 +40,7 @@ body {
     width: 100%;
     top: 0;
     left: 0;
-    padding: 20px 100px;
+    padding: 20px 60px;
     display: flex;
     background-color: transparent;
     justify-content: space-between;
@@ -47,13 +60,12 @@ body {
 }
 
 .header__scroll {
-    position: sticky;
     background-image: linear-gradient(60deg, #00000022, #00000033);
     backdrop-filter: blur(5px);
     border-bottom: 2px solid #ffffff22;
     box-shadow: 0px 10px 5px 0px rgba(0,0,0,0.75);
-
 }
+
 
 .header:hover::before{
     left: 100%;
@@ -75,17 +87,9 @@ body {
 }
 
 
-.core {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-block: 120px;
-    width: 100%;
-}
-
 h1 {
-    font-size: min(5vw, 75px);
-    line-height: 1;
+    font-size: clamp(25px, 4.4vw, 75px);
+    line-height: 1.2;
     letter-spacing: 1.5px;
 }
 
@@ -98,44 +102,15 @@ h1 {
 
 .text-block p {
     line-height: 1.35;
-    font-size: min(2.2vw, 21px);
+    font-size: clamp(15px, 2.38vw, 21px);
 }
 
-.scene {
-    width: 35vw;
+#canvas-container {
+    width: 50vw;
     aspect-ratio: 1;
-    perspective: 1000px;
-}
-
-
-.wrapper {
-    flex: 1 0 auto;
-    width: 100%;
-    height: 100%;
-    transform: rotateX(45deg) rotateY(45deg);
-    transform-style: preserve-3d;
-}
-
-.sphere {
     position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    animation: rotate 50s infinite linear;
-    transition: .5s;
+    z-index: 0;
 }
-
-.line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 1px dotted #ffffff;
-    box-shadow: 1px 0px 20px -2px #000, 1px 0px 50px -2px #060A33;
-}
-
 
 .header .navbar a:hover {
     background: #060A33;
@@ -158,7 +133,19 @@ h1 {
     }
 }
 
+@media (max-width: 1200px) {
+
+    .text-block{
+        max-width: 50%;
+    }
+
+}
+
 @media(max-width: 992px){
+
+    body{
+        padding-inline: 25px;
+    }
 
     .header {
         padding: 1.25rem 4%;
@@ -174,7 +161,7 @@ h1 {
         top: 100%;
         left: 0;
         width: 100%;
-        padding: .5rem 4%;
+        padding-inline: 4%;
         display: none;
     }
 
@@ -188,10 +175,10 @@ h1 {
     }
     .nav-bg {
         position: fixed;
-        top: 11.8%;
+        top: 8vh;
         left: 0;
         width: 100%;
-        height: 295px;
+        min-height: 300px;
         background-image: linear-gradient(60deg, #00000022, #00000033);
         backdrop-filter: blur(30px);
         border-bottom: 2px solid #ffffff22;
@@ -201,5 +188,28 @@ h1 {
 
     .nav-bg.active{
         display: block;
+    }
+
+}
+
+@media (max-width: 560px) {
+    .text-block{
+        max-width: 100%;
+    }
+    .core{
+        justify-content: flex-start;
+        flex-direction: column;
+        margin-top: 110px;
+    }
+    #canvas-container {
+        height: 65vh;
+        width: auto;
+    }
+}
+
+@media (max-width: 400px) {
+    #canvas-container {
+        height: 40vh;
+        width: auto;
     }
 }
